@@ -1260,32 +1260,32 @@ void CPMDataTransformer<Dtype>::generateLabelMap(Dtype* transformed_label, Mat& 
   }
 
   //visualize
-  if(1 && param_.visualize()){
-    Mat label_map;
-    for(int i = 0; i < 2*(np+1); i++){
-      label_map = Mat::zeros(grid_y, grid_x, CV_8UC1);
-      //int MPI_index = MPI_to_ours[i];
-      //Point2f center = meta.joint_self.joints[MPI_index];
-      for (int g_y = 0; g_y < grid_y; g_y++){
-        //printf("\n");
-        for (int g_x = 0; g_x < grid_x; g_x++){
-          label_map.at<uchar>(g_y,g_x) = (int)(transformed_label[i*channelOffset + g_y*grid_x + g_x]*255);
-          //printf("%f ", transformed_label_entry[g_y*grid_x + g_x]*255);
-        }
-      }
-      resize(label_map, label_map, Size(), stride, stride, INTER_LINEAR);
-      //applyColorMap(label_map, label_map, COLORMAP_JET);
-      addWeighted(label_map, 0.5, img_aug, 0.5, 0.0, label_map);
-
-      //center = center * (1.0/(float)param_.stride());
-      //circle(label_map, center, 3, CV_RGB(255,0,255), -1);
-      char imagename [100];
-      sprintf(imagename, "augment_%04d_label_part_%02d.jpg", meta.write_number, i);
-      //LOG(INFO) << "filename is " << imagename;
-      imwrite(imagename, label_map);
-    }
-
-  }
+  // if(1 && param_.visualize()){
+  //   Mat label_map;
+  //   for(int i = 0; i < 2*(np+1); i++){
+  //     label_map = Mat::zeros(grid_y, grid_x, CV_8UC1);
+  //     //int MPI_index = MPI_to_ours[i];
+  //     //Point2f center = meta.joint_self.joints[MPI_index];
+  //     for (int g_y = 0; g_y < grid_y; g_y++){
+  //       //printf("\n");
+  //       for (int g_x = 0; g_x < grid_x; g_x++){
+  //         label_map.at<uchar>(g_y,g_x) = (int)(transformed_label[i*channelOffset + g_y*grid_x + g_x]*255);
+  //         //printf("%f ", transformed_label_entry[g_y*grid_x + g_x]*255);
+  //       }
+  //     }
+  //     resize(label_map, label_map, Size(), stride, stride, INTER_LINEAR);
+  //     //applyColorMap(label_map, label_map, COLORMAP_JET);
+  //     addWeighted(label_map, 0.5, img_aug, 0.5, 0.0, label_map);
+  //
+  //     //center = center * (1.0/(float)param_.stride());
+  //     //circle(label_map, center, 3, CV_RGB(255,0,255), -1);
+  //     char imagename [100];
+  //     sprintf(imagename, "augment_%04d_label_part_%02d.jpg", meta.write_number, i);
+  //     //LOG(INFO) << "filename is " << imagename;
+  //     imwrite(imagename, label_map);
+  //   }
+  //
+  // }
 }
 
 void setLabel(Mat& im, const std::string label, const Point& org) {
